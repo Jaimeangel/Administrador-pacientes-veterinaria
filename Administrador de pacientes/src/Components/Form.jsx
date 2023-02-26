@@ -1,12 +1,26 @@
+import { useState } from "react"
+
 function Form() {
+  const [mascota,setMascota]=useState('');
+  const [propietario,setPropietario]=useState('');
+  const [email,setEmail]=useState('');
+  const [date,setDate]=useState('');
+  const [sintomas,setSintomas]=useState('');
+
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log('enviando')
+  }
+
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="md:w-1/2 lg:w-2/5 px-3">
         <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
         <p className="text-center text-xl font-black mt-4 mb-5">
           Añade Pacientes y {' '}
           <span className="text-indigo-600 font-bold">Administralos</span>
         </p>
-        <form action="" className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+        <form  onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
           
           <div className="mb-5">
             <label 
@@ -21,6 +35,8 @@ function Form() {
               type="text"
               placeholder="Nombre de la mascota"
               className="w-full border-2 p-2 mt-2 placeholder-gray-600 rounded-md"
+              value={mascota}
+              onChange={(e)=>setMascota(e.target.value)}
             />
           </div>
           <div className="mb-5">
@@ -36,6 +52,8 @@ function Form() {
               type="text"
               placeholder="Nombre del propietario"
               className="w-full border-2 p-2 mt-2 placeholder-gray-600 rounded-md"
+              value={propietario}
+              onChange={(e)=>setPropietario(e.target.value)}
             />
           </div>
           <div className="mb-5">
@@ -51,6 +69,8 @@ function Form() {
               type="email"
               placeholder="Email del propietario"
               className="w-full border-2 p-2 mt-2 placeholder-gray-600 rounded-md"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
           <div className="mb-5">
@@ -65,6 +85,8 @@ function Form() {
               id="alta"
               type="date"
               className="w-full border-2 p-2 mt-2 placeholder-gray-600 rounded-md"
+              value={date}
+              onChange={(e)=>setDate(e.target.value)}
             />
           </div>
           <div className="mb-5">
@@ -78,13 +100,15 @@ function Form() {
               id="sintomas"
               className="w-full border-2 p-2 mt-2 placeholder-gray-600 rounded-md"
               placeholder="Describe los sintomas"
+              value={sintomas}
+              onChange={(e)=>setSintomas(e.target.value)}
             />
           </div>
 
           <input 
             type="submit"
             value='agregar paciente' 
-            className="bg-indigo-600 w-full p-3 rounded-lg shadow-sm text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all"
+            className="bg-indigo-600 w-full p-3 rounded-lg text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all shadow-md"
           />
 
         </form>
