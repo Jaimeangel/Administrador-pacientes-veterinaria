@@ -1,16 +1,40 @@
 import { useState } from "react"
+import Error from "./Error";
 
-function Form() {
+function Form({pacientes,setPacientes}) {
   const [mascota,setMascota]=useState('');
   const [propietario,setPropietario]=useState('');
   const [email,setEmail]=useState('');
   const [date,setDate]=useState('');
   const [sintomas,setSintomas]=useState('');
+  const [error,setError]=useState(false);
 
 
+  
   const handleSubmit=(e)=>{
     e.preventDefault();
-    console.log('enviando')
+
+    if([mascota,propietario,email,date,sintomas].includes('')){
+      setError(true)
+      return;
+    }
+    setError(false)
+
+    const objetoPaciente={
+      mascota,
+      propietario,
+      email,
+      date,
+      sintomas
+    }
+    setPacientes([...pacientes,objetoPaciente])
+
+    setMascota('')
+    setPropietario('')
+    setEmail('')
+    setDate('')
+    setSintomas('')
+
   }
 
   return (
@@ -22,6 +46,12 @@ function Form() {
         </p>
         <form  onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
           
+          {error && 
+            <Error
+              texto={'Todos los campos son obligatorios'}
+            />
+          }
+
           <div className="mb-5">
             <label 
               htmlFor="mascota"
