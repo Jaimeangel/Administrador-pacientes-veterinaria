@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Error from "./Error";
 
-function Form({pacientes,setPacientes}) {
+function Form({pacientes,setPacientes,paciente,setPaciente}) {
   const [mascota,setMascota]=useState('');
   const [propietario,setPropietario]=useState('');
   const [email,setEmail]=useState('');
@@ -9,8 +9,9 @@ function Form({pacientes,setPacientes}) {
   const [sintomas,setSintomas]=useState('');
   const [error,setError]=useState(false);
 
-
-  
+  function generateId(){
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+  }
   const handleSubmit=(e)=>{
     e.preventDefault();
 
@@ -27,7 +28,16 @@ function Form({pacientes,setPacientes}) {
       date,
       sintomas
     }
-    setPacientes([...pacientes,objetoPaciente])
+
+    if(Object.keys(paciente).length>0){
+      objetoPaciente.id=paciente.id
+      let pacienteModificar=pacientes.map(pacienteState=>pacienteState.id===paciente.id?objetoPaciente:pacienteState)
+      setPacientes([...pacienteModificar])
+      setPaciente({})
+    }else{
+      objetoPaciente.id=generateId()
+      setPacientes([...pacientes,objetoPaciente])
+    }
 
     setMascota('')
     setPropietario('')
@@ -36,6 +46,16 @@ function Form({pacientes,setPacientes}) {
     setSintomas('')
 
   }
+  useEffect(()=>{
+    if(Object.keys(paciente).length>0){
+      console.log('Aqui si hay algo')
+      setMascota(paciente.mascota)
+      setPropietario(paciente.propietario)
+      setEmail(paciente.email)
+      setDate(paciente.date)
+      setSintomas(paciente.sintomas)
+    }
+  },[paciente])
 
   return (
     <div className="md:w-1/2 lg:w-2/5 px-3">
@@ -46,11 +66,7 @@ function Form({pacientes,setPacientes}) {
         </p>
         <form  onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
           
-          {error && 
-            <Error
-              texto={'Todos los campos son obligatorios'}
-            />
-          }
+          {error && <Error texto={'Todos los campos son obligatorios'}/>}
 
           <div className="mb-5">
             <label 
@@ -137,7 +153,7 @@ function Form({pacientes,setPacientes}) {
 
           <input 
             type="submit"
-            value='agregar paciente' 
+            value={Object.keys(paciente).length!=0 ?'editar paciente':'agregar paciente' }
             className="bg-indigo-600 w-full p-3 rounded-lg text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all shadow-md"
           />
 

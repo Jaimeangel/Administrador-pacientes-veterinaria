@@ -1,25 +1,46 @@
-function Paciente() {
+function Paciente({paciente,setPaciente,eliminarPaciente}) {
+  const {mascota,propietario,email,date,sintomas,id}=paciente;
   return (
-    <div className="bg-white p-5 rounded-lg mb-4 shadow-md">
+    <div  className="bg-white p-5 rounded-lg mb-4 shadow-md">
+
       <div className="my-1">
-        <p><span className="font-bold">Nombre:{' '}</span>Roko</p>
+        <p><span className="font-bold">Nombre:{' '}</span>{mascota}</p>
       </div>
 
       <div className="my-1">
-        <p><span className="font-bold">Propietario:{' '}</span>Erikson</p>
+        <p><span className="font-bold">Propietario:{' '}</span>{propietario}</p>
       </div>
 
       <div className="my-1">
-        <p><span className="font-bold">Email:{' '}</span>jaime@gmail.com</p>
+        <p><span className="font-bold">Email:{' '}</span>{email}</p>
       </div>
 
       <div className="my-1">
-        <p><span className="font-bold">Fecha de alta:{' '}</span>10/11/1997</p>
+        <p><span className="font-bold">Fecha de alta:{' '}</span>{date}</p>
       </div>
 
       <div className="my-1">
-        <p><span className="font-bold">Sintomas:{' '}</span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem repellat ipsum quos, tempore labore magni ipsa aut praesentium delectus dolorem quo neque distinctio similique molestiae corrupti non nobis eius? Repellat.</p>
+        <p><span className="font-bold">Sintomas:{' '}</span>{sintomas}</p>
       </div>
+
+      <div className="mt-3">
+
+        <button 
+          type="button"
+          className="bg-green-500 hover:bg-green-600 py-2 px-7 rounded-md mr-5 uppercase font-bold cursor-pointer shadow-sm"
+          onClick={()=>setPaciente(paciente)}
+          >editar
+        </button>
+
+        <button 
+          type="button"
+          className="bg-red-500 hover:bg-red-600 py-2 px-7 rounded-md mr-5 uppercase font-bold cursor-pointer shadow-sm"
+          onClick={()=>eliminarPaciente(id)}
+          >eliminar
+        </button>
+
+      </div>
+
     </div>
   )
 }
