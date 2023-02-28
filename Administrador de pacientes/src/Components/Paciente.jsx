@@ -23,18 +23,18 @@ function Paciente({paciente,setPaciente,eliminarPaciente}) {
         <p><span className="font-bold">Sintomas:{' '}</span>{sintomas}</p>
       </div>
 
-      <div className="mt-3">
+      <div>
 
         <button 
           type="button"
-          className="bg-green-500 hover:bg-green-600 py-2 px-7 rounded-md mr-5 uppercase font-bold cursor-pointer shadow-sm"
+          className="bg-green-500 hover:bg-green-600 mt-3 py-2 px-7 rounded-md mr-5 uppercase font-bold cursor-pointer shadow-sm"
           onClick={()=>setPaciente(paciente)}
           >editar
         </button>
 
         <button 
           type="button"
-          className="bg-red-500 hover:bg-red-600 py-2 px-7 rounded-md mr-5 uppercase font-bold cursor-pointer shadow-sm"
+          className="bg-red-500 hover:bg-red-600 mt-3 py-2 px-7 rounded-md mr-5 uppercase font-bold cursor-pointer shadow-sm"
           onClick={()=>eliminarPaciente(id)}
           >eliminar
         </button>
