@@ -48,7 +48,6 @@ function Form({pacientes,setPacientes,paciente,setPaciente}) {
   }
   useEffect(()=>{
     if(Object.keys(paciente).length>0){
-      console.log('Aqui si hay algo')
       setMascota(paciente.mascota)
       setPropietario(paciente.propietario)
       setEmail(paciente.email)

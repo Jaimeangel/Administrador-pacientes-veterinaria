@@ -11,6 +11,7 @@ function App() {
   useEffect(()=>{
     const setDataLS=()=>{
       const pacientesLS=JSON.parse(localStorage.getItem('pacientes'));
+      !pacientesLS ? localStorage.setItem('pacientes',JSON.stringify([])): undefined
       Object.keys(pacientesLS).length!=0?setPacientes(pacientesLS):[]
     }
     setDataLS();
